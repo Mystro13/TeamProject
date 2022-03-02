@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: -7344367262058117614}
   - component: {fileID: 2099961277350282194}
   - component: {fileID: 1015707840355575733}
+  - component: {fileID: -4246226357220270034}
+  - component: {fileID: -5559206358993198041}
   m_Layer: 0
   m_Name: Golem_rough_for_rigging
   m_TagString: enemies
@@ -151,3 +153,42 @@ MonoBehaviour:
   healthPotionObject: {fileID: 3206258122975669834, guid: 15853cb2aaaa3b3439c8788449d72bf7, type: 3}
   permaHealthObject: {fileID: 8332050970504056728, guid: f8d1f841b98a8d246ba9417d58476ad9, type: 3}
   hasStockedUp: 0
+--- !u!114 &-4246226357220270034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406599058735336409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 296a44bf91cc99541a150ae1d63825d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wanderRadius: 30
+  wanderTimer: 5
+  Patrolpoints: []
+  curPatrolpoint: 0
+  stayingIdleTimer: 20
+--- !u!195 &-5559206358993198041
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7406599058735336409}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.19104102
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.3224007
+  m_BaseOffset: 0.66120034
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

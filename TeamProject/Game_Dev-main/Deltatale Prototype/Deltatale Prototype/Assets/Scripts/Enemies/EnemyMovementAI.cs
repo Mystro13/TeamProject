@@ -176,7 +176,7 @@ public class EnemyMovementAI : MonoBehaviour
 
     private void AttackingTargetAI()
     {
-      GameObject player = GameObject.FindGameObjectWithTag("Player");
+      GameObject player = GameObject.FindGameObjectWithTag(Tags.Player.ToString());
       if (player)
       {
          AIDestination = player.transform.position;
