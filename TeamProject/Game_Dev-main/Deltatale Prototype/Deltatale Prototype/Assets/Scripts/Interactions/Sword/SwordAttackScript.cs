@@ -12,7 +12,8 @@ public class SwordAttackScript : MonoBehaviour
          EnemyHealth enemyHealth = gameObject.GetComponent<EnemyHealth>();
          if(enemyHealth)
          {
-            enemyHealth.DepleteHealth(healthDamage);
+            //enemyHealth.DepleteHealth(healthDamage);
+            enemyHealth.GetKilled();
          }
       }
    }

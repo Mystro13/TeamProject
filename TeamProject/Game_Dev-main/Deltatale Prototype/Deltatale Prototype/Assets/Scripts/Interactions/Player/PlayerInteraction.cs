@@ -73,7 +73,10 @@ public class PlayerInteraction : MonoBehaviour
             }
             if (playAdditionalInteractions)
             {
-               currentInteractionScript.DoAdditionalInteraction();
+               if (currentInteractionScript)
+               {
+                  currentInteractionScript.DoAdditionalInteraction();
+               }
             }
          }
 
@@ -198,16 +201,29 @@ public class PlayerInteraction : MonoBehaviour
 
    void DoPickSword(GameObject itemObject)
    {
+      if(!itemObject)
+      {
+         currentInteractionScript = null;
+         return;
+      }
       SwordPickup swordPickup = itemObject.GetComponent<SwordPickup>();
       if (swordPickup)
       {
-         Transform swordGrip = transform.Find("SwordGrip");
-         if (swordGrip)
+         Debug.Log("Sword pick up");
+         if (swordPickup.playerHealth)
          {
-            swordPickup.swordGrip = swordGrip.gameObject;
             swordPickup.Execute();
+            swordPickup.playerHealth.ShowSword();
+         }
+         Debug.Log("Spawning");
+         SpawnEnemiesToPoints spawnEnemiesToPoints = itemObject.GetComponent<SpawnEnemiesToPoints>();
+         if (spawnEnemiesToPoints)
+         {
+            itemObject.GetComponent<SpawnEnemiesToPoints>().Execute();
+            itemObject.SetActive(false);
+
          }
       }
-      gameObject.GetComponent<SpawnEnemiesToPoints>().Execute();
+      
    }
 }

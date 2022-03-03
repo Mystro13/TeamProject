@@ -7,10 +7,11 @@ public class SpawnEnemiesToPoints : MonoBehaviour
    public GameObject objectToSpawn;
    public GameObject objectParent;
    public Transform[] spawningPoints;
+   bool enableSpawning;
    // Start is called before the first frame update
    void Start()
    {
-
+      enableSpawning = true;
    }
 
    // Update is called once per frame
@@ -20,10 +21,14 @@ public class SpawnEnemiesToPoints : MonoBehaviour
    }
    public void Execute()
    {
-      foreach (Transform spawnPoint in spawningPoints)
+      if (enableSpawning)
       {
-         GameObject enemyClone = Instantiate(objectToSpawn, spawnPoint.position, spawnPoint.rotation, objectParent.transform);
-         enemyClone.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+         foreach (Transform spawnPoint in spawningPoints)
+         {
+            GameObject enemyClone = Instantiate(objectToSpawn, spawnPoint.position, spawnPoint.rotation, objectParent.transform);
+            enemyClone.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+         }
+         enableSpawning = false;
       }
    }
 }

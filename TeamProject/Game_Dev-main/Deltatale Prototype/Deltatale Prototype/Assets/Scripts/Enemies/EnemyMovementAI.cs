@@ -37,21 +37,6 @@ public class EnemyMovementAI : MonoBehaviour
                     StayIdelAI();
                     break;
                 }
-            case MovementCategoryOptions.MoveTowardsTarget:
-                {
-                    MoveTowardsTargetAI();
-                    break;
-                }
-            case MovementCategoryOptions.RotateTowardsTarget:
-                {
-                    RotateTowardsTargetAI();
-                    break;
-                }
-            case MovementCategoryOptions.SeekTarget:
-                {
-                    SeekTargetAI();
-                    break;
-                }
             case MovementCategoryOptions.FleeingFromAPlayer:
                 {
                     FleeingFromDangerAI();
@@ -62,24 +47,9 @@ public class EnemyMovementAI : MonoBehaviour
                     AttackingTargetAI();
                     break;
                 }
-            case MovementCategoryOptions.PursueingAPlayer:
-                {
-                    PursueTargetAI();
-                    break;
-                }
-            case MovementCategoryOptions.FollowTarget:
-                {
-                    FollowTargetAI();
-                    break;
-                }
             case MovementCategoryOptions.PatrollingAnAreaPath:
                 {
                     PatrolAnAreaAI();
-                    break;
-                }
-            case MovementCategoryOptions.FindingCover:
-                {
-                    FindingCoverAI();
                     break;
                 }
             case MovementCategoryOptions.WanderRandomly:
@@ -125,31 +95,41 @@ public class EnemyMovementAI : MonoBehaviour
         }
     }
 
-   void OnTriggerEnter(Collider other)
+   void OnCollisionEnter(Collision collision)
    {
-      if(other.gameObject.tag.Equals("Player"))
+      if(collision.gameObject.CompareTag(Tags.Player.ToString()))
       {
-         PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
+         PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
          if(playerHealth)
          {
             playerHealth.DepleteHealth();
          }
+
+         EnemyHealth enemyHealth = gameObject.GetComponent<EnemyHealth>();
+         if (enemyHealth)
+         {
+            enemyHealth.GetKilled();
+         }
       }
    }
-   private void MoveTowardsTargetAI()
-    {
-        throw new NotImplementedException();
-    }
 
-    private void RotateTowardsTargetAI()
-    {
-        throw new NotImplementedException();
-    }
+   void OnTriggerEnter(Collider other)
+   {
+      if (other.gameObject.CompareTag(Tags.Player.ToString()))
+      {
+         PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
+         if (playerHealth)
+         {
+            playerHealth.GetKilled();
+         }
 
-    private void SeekTargetAI()
-    {
-        throw new NotImplementedException();
-    }
+         EnemyHealth enemyHealth = gameObject.GetComponent<EnemyHealth>();
+         if (enemyHealth)
+         {
+            enemyHealth.GetKilled();
+         }
+      }
+   }
 
     private void FleeingFromDangerAI()
     {
@@ -169,26 +149,17 @@ public class EnemyMovementAI : MonoBehaviour
         }
     }
 
-    private void PursueTargetAI()
-    {
-        throw new NotImplementedException();
-    }
-
     private void AttackingTargetAI()
     {
       GameObject player = GameObject.FindGameObjectWithTag(Tags.Player.ToString());
       if (player)
       {
-         AIDestination = player.transform.position;
+         Debug.Log("attacking player");
+         AIDestination = player.transform.position - new Vector3(0f, -20f, 0f); ;
          navigationAgent.SetDestination(AIDestination);
          distanceToDestination = Vector3.Distance(gameObject.transform.position, AIDestination);
       }
    }
-
-    private void FollowTargetAI()
-    {
-        throw new NotImplementedException();
-    }
 
     private void PatrolAnAreaAI()
     {
@@ -225,11 +196,6 @@ public class EnemyMovementAI : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void FindingCoverAI()
-    {
-        throw new NotImplementedException();
     }
 
     private void SearchTargetAI()

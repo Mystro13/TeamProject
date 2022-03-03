@@ -36,7 +36,10 @@ public class InteractionObject : MonoBehaviour
 	public void DoAdditionalInteraction()
 	{
 		CompositeInteractionsScript compositeInteractionsScript = gameObject.GetComponent<CompositeInteractionsScript>();
-		compositeInteractionsScript.Execute();
+		if (compositeInteractionsScript)
+		{
+			compositeInteractionsScript.Execute();
+		}
    }
    public void DoFlashAndDie()
 	{

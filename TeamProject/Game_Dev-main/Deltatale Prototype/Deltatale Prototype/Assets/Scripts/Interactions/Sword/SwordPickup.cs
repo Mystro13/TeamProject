@@ -5,29 +5,47 @@ using UnityEngine;
 
 public class SwordPickup : MonoBehaviour
 {
-   public GameObject swordGrip;
+   public PlayerHealth playerHealth;
+   private GameObject sword;
    public void Execute()
    {
-      GetComponent<Rigidbody>().useGravity = false;
-      DetachFromParent();
-      AttachToParent(swordGrip);
-      EnableSword();
-   }
-   void AttachToParent(GameObject newParent)
-   {
-      transform.position = newParent.transform.position;
-      transform.parent = newParent.transform; 
-   }
-   void DetachFromParent()
-   {
-      transform.parent = null;
-   }
-   void EnableSword()
-   {
-      AimSwordScript aimSwordScript = gameObject.GetComponent<AimSwordScript>();
-      if(aimSwordScript)
+      sword = GameObject.Find("Sword");
+      if (sword)
       {
-         aimSwordScript.EnableSword();
+         sword.SetActive(false);
+         //sword.GetComponent<Rigidbody>().useGravity = false;
+         //DetachFromParent();
+         //AttachToParent(swordGrip);
+         //EnableSword();
       }
+
+      //if(playerHealth)
+      //{
+      //   playerHealth.ShowSword();
+      //}
+
+      //GameObject battleSword = GameObject.Find("BattleSword");
+      //if(battleSword)
+      //{
+      //   battleSword.SetActive(true);
+      //}
    }
+   //void AttachToParent(GameObject newParent)
+   //{
+   //   sword.transform.position = newParent.transform.position;
+   //   sword.transform.parent = newParent.transform; 
+   //}
+   //void DetachFromParent()
+   //{
+   //   sword.transform.parent = null;
+   //}
+   //void EnableSword()
+   //{
+   //   AimSwordScript aimSwordScript = sword.GetComponent<AimSwordScript>();
+   //   if(aimSwordScript)
+   //   {
+   //      aimSwordScript.EnableSword();
+   //   }
+   //   sword.GetComponent<Rigidbody>().useGravity = true;
+   //}
 }
