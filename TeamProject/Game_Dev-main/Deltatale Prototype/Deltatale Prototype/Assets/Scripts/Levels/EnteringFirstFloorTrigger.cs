@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class EnteringFirstFloorTrigger : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
-    {
-      SceneLoader.Load(SceneLoader.Scene.FirstFloor);
-    }
+   private void OnTriggerEnter(Collider other)
+   {
+      if (other.gameObject.CompareTag(Tags.Player.ToString()))
+      {
+         SceneLoader.Load(SceneLoader.Scene.FirstFloor);
+      }
+   }
 }
